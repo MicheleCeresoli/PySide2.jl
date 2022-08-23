@@ -1,5 +1,9 @@
 module PySide2
 
-# Write your package code here.
+include("core/QtCore.jl")
+include("widgets/QtWidgets.jl")
+
+function __init__()
+end
 
 end
