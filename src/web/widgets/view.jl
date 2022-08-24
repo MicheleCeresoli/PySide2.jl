@@ -19,22 +19,58 @@ QWebEngineView() = QWebEngineView(pyQtWebEngineWidgets.QWebEngineView())
 # Implements the conversion from the Python QRect object to the Julia type.
 @inline pyc_qwew(S, p::Py) = PythonCall.pyconvert_return(QWebEngineView(p))
 
-@inline back!(we::QWebEngineView) = we.obj.back()
-@inline forward!(we::QWebEngineView) = we.obj.forward()
+@inline function back!(we::QWebEngineView)
+    we.obj.back()
+    nothing 
+end
+
+@inline function forward!(we::QWebEngineView)
+    we.obj.forward()
+    nothing 
+end
 
 @inline has_selection(we::QWebEngineView) = pyconvert(Bool, we.obj.hasSelection())
+
 @inline icon_url(we::QWebEngineView) = pyconvert(QUrl, we.obj.iconUrl())
 
-@inline load!(we::QWebEngineView, url::QUrl) = we.obj.load(url)
-@inline load_started!(we::QWebEngineView) = we.obj.loadStarted()
-@inline reload!(we::QWebEngineView) = we.obj.reload()
+@inline function load!(we::QWebEngineView, url::QUrl)
+    we.obj.load(url)
+    nothing 
+end
+
+@inline function load_started!(we::QWebEngineView)
+    we.obj.loadStarted()    
+    nothing 
+end
+
+@inline function reload!(we::QWebEngineView)
+    we.obj.reload()
+    nothing 
+end
 
 @inline selected_text(we::QWebEngineView) = pyconvert(String, we.obj.selectedText())
-@inline set_html!(we::QWebEngineView, html::String) = we.obj.setHtml(html)
-@inline set_url!(we::QWebEngineView, url::QUrl) = we.obj.setUrl(url)
-@inline set_zoom_factor!(we::QWebEngineView, f::AbstractFloat) = we.obj.setZoomFactor(f)
 
-@inline stop!(we::QWebEngineView) = we.obj.stop()
+@inline function set_html!(we::QWebEngineView, html::String)
+    we.obj.setHtml(html)
+    nothing 
+end
+
+@inline function set_url!(we::QWebEngineView, url::QUrl)
+    we.obj.setUrl(url)
+    nothing 
+end
+
+@inline function set_zoom_factor!(we::QWebEngineView, f::AbstractFloat)
+    we.obj.setZoomFactor(f)
+    nothing 
+end
+
+
+@inline function stop!(we::QWebEngineView)
+    we.obj.stop()
+    nothing 
+end
+
 @inline title(we::QWebEngineView) = pyconvert(String, we.obj.title())
 
 @inline url(we::QWebEngineView) = pyconvert(QUrl, we.obj.url())

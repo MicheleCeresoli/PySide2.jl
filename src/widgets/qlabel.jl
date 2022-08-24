@@ -18,9 +18,21 @@ end
 QLabel() = QLabel(pyQtWidgets.QLabel())
 QLabel(text::String) = QLabel(pyQtWidgets.QLabel(text))
 
-@inline alignment(ql::QLabel) = ql.obj.alignment()
-@inline buddy(ql::QLabel) = ql.obj.buddy()
-@inline clear!(ql::QLabel) = ql.obj.clear()
+@inline function alignment(ql::QLabel)
+    ql.obj.alignment()
+    nothing 
+end
+
+@inline function buddy(ql::QLabel)
+    ql.obj.buddy()
+    nothing 
+end
+
+@inline function clear!(ql::QLabel)
+    ql.obj.clear()
+    nothing 
+end
+
 @inline has_scaled_contents(ql::QLabel) = pyconvert(Bool, ql.obj.hasScaledContents())
 @inline has_selected_text(ql::QLabel) = pyconvert(Bool, ql.obj.hasSelectedText())
 @inline indent(ql::QLabel) = pyconvert(Int, ql.obj.indent())
@@ -30,11 +42,26 @@ QLabel(text::String) = QLabel(pyQtWidgets.QLabel(text))
 @inline selected_text(ql::QLabel) = pyconvert(String, ql.obj.selectedText())
 @inline selection_start(ql::QLabel) = pyconvert(Int, ql.obj.selectionStart())
 
-@inline set_indent!(ql::QLabel, x::Int) = ql.obj.setIndent(x)
-@inline set_margin!(ql::QLabel, x::Int) = ql.obj.setMargin(x)
-@inline set_num!(ql::QLabel, num::Int) = ql.obj.setNum(num)
+@inline function set_indent!(ql::QLabel, x::Int)
+    ql.obj.setIndent(x)
+    nothing 
+end
 
-@inline set_text!(ql::QLabel, text::String) = ql.obj.setText(text)
+@inline function set_margin!(ql::QLabel, x::Int)
+    ql.obj.setMargin(x)
+    nothing 
+end
+
+@inline function set_num!(ql::QLabel, num::Int)
+    ql.obj.setNum(num)
+    nothing 
+end
+
+@inline function set_text!(ql::QLabel, text::String)
+    ql.obj.setText(text)
+    nothing 
+end
+
 @inline text(ql::QLabel) = pyconvert(String, ql.obj.text())
 
 @inline word_wrap(ql::QLabel) = pyconvert(Bool, ql.obj.wordWrap())

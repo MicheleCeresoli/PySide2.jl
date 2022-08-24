@@ -82,7 +82,10 @@ such as windows and dialogs.
 
 @inline height_for_width(qw::QWidget) = pyconvert(Int, qw.obj.heightForWidth())
 
-@inline hide(qw::QWidget) = qw.obj.hide()
+@inline function hide(qw::QWidget) 
+    qw.obj.hide()
+    nothing 
+end
 
 @inline is_active_window(qw::QWidget) = pyconvert(Bool, qw.obj.isActiveWindow())
 @inline is_enabled(qw::QWidget) = pyconvert(Bool, qw.obj.isEnabled())
@@ -119,68 +122,222 @@ function pos(qw::QWidget, val::Symbol)
     end
 end
 
-@inline raise(qw::QWidget) = qw.obj.raise_()
+@inline function raise(qw::QWidget)
+    qw.obj.raise_()
+    nothing 
+end
+
 @inline rect(qw::QWidget) = pyconvert(QRect, qw.obj.rect())
 
-@inline release_keyboard(qw::QWidget) = qw.obj.releaseKeyboard()
-@inline release_mouse(qw::QWidget) = qw.obj.releaseMouse()
+@inline function release_keyboard(qw::QWidget)
+    qw.obj.releaseKeyboard()
+    nothing 
+end
 
-@inline repaint!(qw::QWidget, x::Int, y::Int, w::Int, h::Int) = qw.obj.repaint(x, y, w, h)
-@inline repaint!(qw::QWidget, qr::QRect) = qw.obj.repaint(qr)
+@inline function release_mouse(qw::QWidget)
+    qw.obj.releaseMouse()
+    nothing 
+end
 
-@inline resize!(qw::QWidget, qs::QSize) = qw.obj.resize(qs)
-@inline resize!(qw::QWidget, w::Int, h::Int) = qw.obj.resize(w, h)
+@inline function repaint!(qw::QWidget, x::Int, y::Int, w::Int, h::Int)
+    qw.obj.repaint(x, y, w, h)    
+    nothing 
+end
 
-@inline scroll(qw::QWidget, dx::Int, dy::Int) = qw.obj.scroll(dx, dy)
-@inline set_accept_drops!(qw::QWidget, on::Bool) = qw.obj.setAcceptDrops(on)
-@inline set_accessible_description!(qw::QWidget, ds::String) = qw.obj.setAccessibleDescription(ds)
-@inline set_accessible_name!(qw::QWidget, n::String) = qw.obj.setAccessibleName(n)
+@inline function repaint!(qw::QWidget, qr::QRect)
+    qw.obj.repaint(qr)
+    nothing 
+end
 
-@inline set_autofill_background!(qw::QWidget, e::Bool) = qw.obj.setAutoFillBackground(e)
-@inline set_base_size!(qw::QWidget, qs::QSize) = qw.obj.setBaseSize(qs)
-@inline set_base_size!(qw::QWidget, w::Int, h::Int) = qw.obj.setBaseSize(w, h)
-@inline set_contents_margins!(qw::QWidget, qm::QMargins) = qw.obj.setContentsMargins(qm)
-@inline set_contents_margins!(qw::QWidget, l::Int, t::Int, r::Int, b::Int) = 
-        qw.obj.setContentsMargins(l, t, r, b)
+@inline function resize!(qw::QWidget, qs::QSize)
+    qw.obj.resize(qs)
+    nothing 
+end
 
-@inline set_disabled!(qw::QWidget, d::Bool) = qw.obj.setDisabled(d)
-@inline set_enabled!(qw::QWidget, e::Bool) = qw.obj.setEnabled(e)
+@inline function resize!(qw::QWidget, w::Int, h::Int)
+    qw.obj.resize(w, h)    
+    nothing 
+end
 
-@inline set_fixed_height!(qw::QWidget, h::Int) = qw.obj.setFixedHeight(h)
-@inline set_fixed_size!(qw::QWidget, qs::QSize) = qw.obj.setFixedSize(qs)
-@inline set_fixed_size!(qw::QWidget, w::Int, h::Int) = qw.obj.setFixedSize(w, h)
-@inline set_fixed_width!(qw::QWidget, w::Int) = qw.obj.setFixedWidth(w)
+@inline function scroll(qw::QWidget, dx::Int, dy::Int)
+    qw.obj.scroll(dx, dy)
+    nothing 
+end
 
-@inline set_geometry!(qw::QWidget, qr::QRect) = qw.obj.setGeometry(qr)
-@inline set_geometry!(qw::QWidget, x::Int, y::Int, w::Int, h::Int) = 
-        qw.obj.setGeometry(x, y, w, h)
+@inline function set_accept_drops!(qw::QWidget, on::Bool)
+    qw.obj.setAcceptDrops(on)
+    nothing 
+end
 
-@inline set_hidden!(qw::QWidget, h::Bool) = qw.obj.setHidden(h)
+@inline function set_accessible_description!(qw::QWidget, ds::String)
+    qw.obj.setAccessibleDescription(ds)
+    nothing 
+end
 
-@inline set_maximum_height!(qw::QWidget, h::Int) = qw.obj.setMaximumHeight(h)
-@inline set_maximum_size!(qw::QWidget, qs::QSize) = qw.obj.setMaximumSize(qs)
-@inline set_maximum_size!(qw::QWidget, w::Int, h::Int) = qw.obj.setMaximumSize(w, h)
-@inline set_maximum_width!(qw::QWidget, w::Int) = qw.obj.setMaximumWidth(w)
+@inline function set_accessible_name!(qw::QWidget, n::String)
+    qw.obj.setAccessibleName(n)
+    nothing 
+end
 
-@inline set_minimum_height!(qw::QWidget, h::Int) = qw.obj.setMinimumHeight(h)
-@inline set_minimum_size!(qw::QWidget, qs::QSize) = qw.obj.setMinimumSize(qs)
-@inline set_minimum_size!(qw::QWidget, w::Int, h::Int) = qw.obj.setMinimumSize(w, h)
-@inline set_minimum_width!(qw::QWidget, w::Int) = qw.obj.setMinimumWidth(w)
+@inline function set_autofill_background!(qw::QWidget, e::Bool)
+    qw.obj.setAutoFillBackground(e)
+    nothing 
+end
 
-@inline set_mouse_tracking!(qw::QWidget, e::Bool) = qw.obj.setMouseTracking(e)
+@inline function set_base_size!(qw::QWidget, qs::QSize)
+    qw.obj.setBaseSize(qs)
+    nothing 
+end
 
-@inline set_size_increment!(qw::QWidget, qs::QSize) = qw.obj.setSizeIncrement(qs)
-@inline set_size_increment!(qw::QWidget, w::Int, h::Int) = qw.obj.setSizeIncrement(w, h)
+@inline function set_base_size!(qw::QWidget, w::Int, h::Int)
+    qw.obj.setBaseSize(w, h)
+    nothing 
+end
 
-@inline set_status_tip!(qw::QWidget, tip::String) = qw.obj.setStatusTip(tip)
+@inline function set_contents_margins!(qw::QWidget, qm::QMargins)
+    qw.obj.setContentsMargins(qm)
+    nothing 
+end
 
-@inline set_tablet_tracking!(qw::QWidget, e::Bool) = qw.obj.setTabletTracking(e)
-@inline set_tooltip_duration!(qw::QWidget, msec::Int) = qw.obj.setToolTipDuration(msec)
-@inline set_updates_enabled!(qw::QWidget, e::Bool) = qw.obj.setUpdatesEnabled(e)
-@inline set_visible!(qw::QWidget, v::Bool) = qw.obj.setVisible(v)
+@inline function set_contents_margins!(qw::QWidget, l::Int, t::Int, r::Int, b::Int)
+    qw.obj.setContentsMargins(l, t, r, b)
+    nothing 
+end
 
-@inline set_window_icon_text!(qw::QWidget, txt::String) = qw.obj.setWindowIconText(txt)
-@inline set_window_opacity!(qw::QWidget, op::AbstractFloat) = qw.obj.setWindowOpacity(op)
+@inline function set_disabled!(qw::QWidget, d::Bool)
+    qw.obj.setDisabled(d)
+    nothing 
+end
+
+@inline function set_enabled!(qw::QWidget, e::Bool)
+    qw.obj.setEnabled(e)
+    nothing 
+end
+
+@inline function set_fixed_height!(qw::QWidget, h::Int)
+    qw.obj.setFixedHeight(h)
+    nothing 
+end
+
+@inline function set_fixed_size!(qw::QWidget, qs::QSize)
+    qw.obj.setFixedSize(qs)
+    nothing 
+end
+
+@inline function set_fixed_size!(qw::QWidget, w::Int, h::Int)
+    qw.obj.setFixedSize(w, h)
+    nothing 
+end
+
+@inline function set_fixed_width!(qw::QWidget, w::Int)
+    qw.obj.setFixedWidth(w)
+    nothing 
+end
+
+@inline function set_geometry!(qw::QWidget, qr::QRect)
+    qw.obj.setGeometry(qr)
+    nothing 
+end
+
+@inline function set_geometry!(qw::QWidget, x::Int, y::Int, w::Int, h::Int) 
+    qw.obj.setGeometry(x, y, w, h)
+    nothing 
+end
+
+@inline function set_hidden!(qw::QWidget, h::Bool)
+    qw.obj.setHidden(h)
+    nothing 
+end
+
+@inline function set_maximum_height!(qw::QWidget, h::Int)
+    qw.obj.setMaximumHeight(h)
+    nothing 
+end
+
+@inline function set_maximum_size!(qw::QWidget, qs::QSize)
+    qw.obj.setMaximumSize(qs)
+    nothing 
+end
+
+@inline function set_maximum_size!(qw::QWidget, w::Int, h::Int)
+    qw.obj.setMaximumSize(w, h)
+    nothing 
+end
+
+@inline function set_maximum_width!(qw::QWidget, w::Int)
+    qw.obj.setMaximumWidth(w)
+    nothing 
+end
+
+@inline function set_minimum_height!(qw::QWidget, h::Int)
+    qw.obj.setMinimumHeight(h)
+    nothing 
+end
+
+@inline function set_minimum_size!(qw::QWidget, qs::QSize)
+    qw.obj.setMinimumSize(qs)
+    nothing 
+end
+
+@inline function set_minimum_size!(qw::QWidget, w::Int, h::Int)
+    qw.obj.setMinimumSize(w, h)
+    nothing 
+end
+
+@inline function set_minimum_width!(qw::QWidget, w::Int)
+    qw.obj.setMinimumWidth(w)
+    nothing 
+end
+
+@inline function set_mouse_tracking!(qw::QWidget, e::Bool)
+    qw.obj.setMouseTracking(e)
+    nothing 
+end
+
+@inline function set_size_increment!(qw::QWidget, qs::QSize)
+    qw.obj.setSizeIncrement(qs)
+    nothing 
+end
+
+@inline function set_size_increment!(qw::QWidget, w::Int, h::Int)
+    qw.obj.setSizeIncrement(w, h)
+    nothing 
+end
+
+@inline function set_status_tip!(qw::QWidget, tip::String)
+    qw.obj.setStatusTip(tip)
+    nothing 
+end
+
+@inline function set_tablet_tracking!(qw::QWidget, e::Bool)
+    qw.obj.setTabletTracking(e)
+    nothing 
+end
+
+@inline function set_tooltip_duration!(qw::QWidget, msec::Int)
+    qw.obj.setToolTipDuration(msec)
+    nothing 
+end
+
+@inline function set_updates_enabled!(qw::QWidget, e::Bool)
+    qw.obj.setUpdatesEnabled(e)
+    nothing 
+end
+
+@inline function set_visible!(qw::QWidget, v::Bool)
+    qw.obj.setVisible(v)
+    nothing 
+end
+
+@inline function set_window_icon_text!(qw::QWidget, txt::String)
+    qw.obj.setWindowIconText(txt)
+    nothing 
+end
+
+@inline function set_window_opacity!(qw::QWidget, op::AbstractFloat)
+    qw.obj.setWindowOpacity(op)
+    nothing 
+end
 
 
 """
@@ -198,13 +355,35 @@ Update the window title (caption).
 The title property and so this function only make sense for top-level widgets, 
 such as windows and dialogs. 
 """
-@inline set_window_title!(qw::QWidget, title::String) = qw.obj.setWindowTitle(pystr(title))
+@inline function set_window_title!(qw::QWidget, title::String)
+    qw.obj.setWindowTitle(pystr(title))
+    nothing 
+end
 
-@inline show_widget(qw::QWidget) = qw.obj.show()
-@inline show_fullscreen(qw::QWidget) = qw.obj.showFullScreen()
-@inline show_maximised(qw::QWidget) = qw.obj.showMaximised()
-@inline show_minimised(qw::QWidget) = qw.obj.showMinimised()
-@inline show_normal(qw::QWidget) = qw.obj.showNormal()
+@inline function show_widget(qw::QWidget)
+    qw.obj.show()
+    nothing 
+end
+
+@inline function show_fullscreen(qw::QWidget)
+    qw.obj.showFullScreen()
+    nothing 
+end
+
+@inline function show_maximised(qw::QWidget)
+    qw.obj.showMaximised()
+    nothing 
+end
+
+@inline function show_minimised(qw::QWidget)
+    qw.obj.showMinimised()
+    nothing 
+end
+
+@inline function show_normal(qw::QWidget)
+    qw.obj.showNormal()
+    nothing 
+end
 
 @inline size(qw::QWidget) = pyconvert(QSize, qw.obj.size())
 @inline size_hint(qw::QWidget) = pyconvert(QSize, qw.obj.sizeHint())
@@ -215,12 +394,26 @@ such as windows and dialogs.
 @inline tooltip_duration(qw::QWidget) = pyconvert(Int, qw.obj.toolTipDuration())
 
 @inline under_mouse(qw::QWidget) = pyconvert(Bool, qw.obj.underMouse())
-@inline update!(qw::QWidget) = qw.obj.update()
-@inline update!(qw::QWidget, qr::QRect) = qw.obj.update(qr)
-@inline update!(qw::QWidget, x::Int, y::Int, w::Int, h::Int) = 
-        qw.obj.update(x, y, w, h)
 
-@inline update_geometry!(qw::QWidget) = qw.obj.updateGeometry()
+@inline function update!(qw::QWidget)
+    qw.obj.update()
+    nothing 
+end
+
+@inline function update!(qw::QWidget, qr::QRect)
+    qw.obj.update(qr)
+    nothing 
+end
+
+@inline function update!(qw::QWidget, x::Int, y::Int, w::Int, h::Int) 
+    qw.obj.update(x, y, w, h)
+    nothing 
+end
+    
+@inline function update_geometry!(qw::QWidget)
+    qw.obj.updateGeometry()
+    nothing 
+end
 
 @inline updates_enabled(qw::QWidget) = pyconvert(Bool, qw.obj.updatesEnabled())
 @inline window_title(qw::QWidget) = pyconvert(String, qw.obj.windowTitle())

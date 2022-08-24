@@ -6,7 +6,7 @@ include("core/QtCore.jl")
 include("widgets/QtWidgets.jl")
 include("web/QWebEngine.jl")
 
-import .QtCore, .QtWidgets
+import .QtCore, .QtWidgets, .QtWebEngineWidgets
 using PythonCall: PythonCall
 
 const app = PythonCall.pynew()

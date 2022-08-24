@@ -1,6 +1,6 @@
 
 export QMargins, left, right, bottom, top, is_null, 
-set_left!, set_right!, set_bottom!, set_top!
+        set_left!, set_right!, set_bottom!, set_top!
 
 """
 QMargins
@@ -16,13 +16,13 @@ surrounding a rectangle.
 - `bottom` -- bottom margin
 """
 mutable struct QMargins
-left::Int 
-top::Int 
+    left::Int 
+    top::Int 
 
-right::Int 
-bottom::Int 
+    right::Int 
+    bottom::Int 
 
-QMargins(l::T, t::T, r::T, b::T) where {T <: Number} = new(round(Int, l), 
+    QMargins(l::T, t::T, r::T, b::T) where {T <: Number} = new(round(Int, l), 
                                                         round(Int, t), 
                                                         round(Int, r),
                                                         round(Int, b))
@@ -36,12 +36,12 @@ PythonCall.Py(m::QMargins) = pyQtCore.QMargins(m.left, m.top, m.right, m.bottom)
 
 # Implements the conversion from the Python QMargins object to the Julia type.
 function pyc_qmargins(S, p::Py) 
-l = pyconvert(Int, p.left())
-t = pyconvert(Int, p.top())
-r = pyconvert(Int, p.right())
-b = pyconvert(Int, p.bottom())
+    l = pyconvert(Int, p.left())
+    t = pyconvert(Int, p.top())
+    r = pyconvert(Int, p.right())
+    b = pyconvert(Int, p.bottom())
 
-PythonCall.pyconvert_return(QMargins(l, t, r, b))
+    PythonCall.pyconvert_return(QMargins(l, t, r, b))
 end
 
 
@@ -86,6 +86,6 @@ Base.:(/)(x::QMargins, y::Number) = QMargins(x.left/y, x.top/y,
 @inline set_top!(qm::QMargins, t::Int) = qm.top = t
 
 function Base.show(io::IO, ::MIME"text/plain", m::QMargins) 
-printstyled(io, "QMargins", bold=true)
-print(" (left: $(m.left), top: $(m.top), right: $(m.right), bottom: $(m.bottom))")
+    printstyled(io, "QMargins", bold=true)
+    print(" (left: $(m.left), top: $(m.top), right: $(m.right), bottom: $(m.bottom))")
 end

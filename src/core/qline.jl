@@ -1,7 +1,7 @@
 
 export QLine, x1, x2, y1, y2, dx, dy, p1, p2, 
-center, set_p1!, set_p2!, set_points!, 
-translate!, translate
+         center, set_p1!, set_p2!, set_points!, 
+         translate!, translate
 
 """
 QLine
@@ -19,14 +19,14 @@ retrieve a floating point copy.
 - `y2` -- final point `y`-coordinate
 """
 mutable struct QLine
-x1::Int 
-y1::Int
+   x1::Int 
+   y1::Int
 
-x2::Int     
-y2::Int
+   x2::Int     
+   y2::Int
 
-QLine(x1::Number, y1::Number, 
-   x2::Number, y2::Number) = new(round(Int, x1), round(Int, y1), 
+   QLine(x1::Number, y1::Number, 
+         x2::Number, y2::Number) = new(round(Int, x1), round(Int, y1), 
                                  round(Int, x2), round(Int, y2))
 
 end
@@ -39,12 +39,12 @@ PythonCall.Py(l::QLine) = pyQtCore.QLine(l.x1, l.y1, l.x2, l.y2)
 
 # Implements the conversion from the Python QLine object to the Julia type.
 function pyc_qline(S, p::Py) 
-x1 = pyconvert(Int, p.x1())
-y1 = pyconvert(Int, p.y1())
-x2 = pyconvert(Int, p.x2())
-y2 = pyconvert(Int, p.y2())
+   x1 = pyconvert(Int, p.x1())
+   y1 = pyconvert(Int, p.y1())
+   x2 = pyconvert(Int, p.x2())
+   y2 = pyconvert(Int, p.y2())
 
-PythonCall.pyconvert_return(QLine(x1, y1, x2, y2))
+   PythonCall.pyconvert_return(QLine(x1, y1, x2, y2))
 end
 
 Base.:(==)(x::QLine, y::QLine) = (x.x1 == y.x1 && x.x2 == y.x2 &&
@@ -72,34 +72,34 @@ Base.convert(::Type{<:Tuple}, ql::QLine) = (ql.x1, ql.y1, ql.x2, ql.y2)
 @inline set_p2!(ql::QLine, p::QPoint) = ql.x2, ql.y2 = x(p), y(p) 
 
 @inline function set_points!(ql::QLine, p1::QPoint, p2::QPoint) 
-ql.x1, ql.y1, ql.x2, ql.y2 = x(p1), y(p1), x(p2), y(p2)
+   ql.x1, ql.y1, ql.x2, ql.y2 = x(p1), y(p1), x(p2), y(p2)
 end
 
 function translate!(ql::QLine, δx::Int, δy::Int)
-ql.x1 += δx 
-ql.x2 += δx 
+   ql.x1 += δx 
+   ql.x2 += δx 
 
-ql.y1 += δy
-ql.y2 += δy
+   ql.y1 += δy
+   ql.y2 += δy
 end
 
 function translate!(ql::QLine, qp::QPoint)
-ql.x1 += x(qp)
-ql.x2 += x(qp)
+   ql.x1 += x(qp)
+   ql.x2 += x(qp)
 
-ql.y1 += y(qp)
-ql.y2 += y(qp)
+   ql.y1 += y(qp)
+   ql.y2 += y(qp)
 end
 
 @inline function translate(ql::QLine, δx::Int, δy::Int)
-QLine(ql.x1 + δx, ql.y1 + δy, ql.x2 + δx, ql.y2 + δy)
+   QLine(ql.x1 + δx, ql.y1 + δy, ql.x2 + δx, ql.y2 + δy)
 end
 
 @inline function translate(ql::QLine, qp::QPoint)
-QLine(ql.x1 + x(qp), ql.y1 + y(qp), ql.x2 + x(qp), ql.y2 + y(qp))
+   QLine(ql.x1 + x(qp), ql.y1 + y(qp), ql.x2 + x(qp), ql.y2 + y(qp))
 end
 
 function Base.show(io::IO, ::MIME"text/plain", l::QLine) 
-printstyled(io, "QLine", bold=true)
-print(" from ($(l.x1), $(l.y1)) to ($(l.x2), $(l.y2))")
+   printstyled(io, "QLine", bold=true)
+   print(" from ($(l.x1), $(l.y1)) to ($(l.x2), $(l.y2))")
 end

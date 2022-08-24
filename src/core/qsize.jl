@@ -1,6 +1,6 @@
 
 export QSize, width, height, set_width!, set_height!, resize!, 
-is_null, is_empty, transpose, transpose!, scale!
+        is_null, is_empty, transpose, transpose!, scale!
 
 """
 QSize 
@@ -15,10 +15,10 @@ point precision. It is the representation of `PySide2.QtCore.QSize`.
 
 """
 mutable struct QSize 
-width::Int
-height::Int 
+    width::Int
+    height::Int 
 
-QSize(w::Number, h::Number) = new(round(Int, w), round(Int, h))
+    QSize(w::Number, h::Number) = new(round(Int, w), round(Int, h))
 end
 
 # Constructs a default size 
@@ -29,9 +29,9 @@ PythonCall.Py(s::QSize) = pyQtCore.QSize(s.width, s.height)
 
 # Implements the conversion from the Python QSize object to the Julia type.
 function pyc_qsize(S, p::Py) 
-w = pyconvert(Int, p.width())
-h = pyconvert(Int, p.height())
-PythonCall.pyconvert_return(QSize(w, h))
+    w = pyconvert(Int, p.width())
+    h = pyconvert(Int, p.height())
+    PythonCall.pyconvert_return(QSize(w, h))
 end
 
 Base.:(==)(x::QSize, y::QSize) = (x.width == y.width && x.height == y.height)
@@ -49,8 +49,8 @@ Base.convert(::Type{<:Tuple}, qs::QSize) = (qs.width, qs.height)
 @inline set_height!(qs::QSize, h::Int) = qs.height = h 
 
 function resize!(qs::QSize, w::Int, h::Int)
-set_width!(qs, w)
-set_height!(qs, h)
+    set_width!(qs, w)
+    set_height!(qs, h)
 end 
 
 @inline is_null(qs::QSize) = (qs.width == 0 && qs.height == 0)
@@ -60,38 +60,38 @@ end
 @inline transpose!(qs::QSize) = qs.width, qs.height = qs.height, qs.width
 
 function scale!(qs::QSize, scale::Number) 
-w = floor(Int, width(qs)*scale)
-h = floor(Int, height(qs)*scale)
+    w = floor(Int, width(qs)*scale)
+    h = floor(Int, height(qs)*scale)
 
-set_width!(qs, w)
-set_height!(qs, h)
+    set_width!(qs, w)
+    set_height!(qs, h)
 end
 
 function scale!(qs::QSize, w::Int, h::Int, mode::Symbol)
 
 if mode == :IgnoreAspectRatio 
- set_width!(qs, w)
- set_height!(qs, h)
+    set_width!(qs, w)
+    set_height!(qs, h)
 
-else
- vs = h/height(qs)
- hs = w/width(qs)
+    else
+        vs = h/height(qs)
+        hs = w/width(qs)
 
- if mode == :KeepAspectRatio 
-     fct = min(hs, vs)
- elseif mode == :KeepAspectRatioByExpanding 
-     fct = max(hs, vs)
- else 
-     error("Invalid scaling mode selected.")
- end 
+        if mode == :KeepAspectRatio 
+            fct = min(hs, vs)
+        elseif mode == :KeepAspectRatioByExpanding 
+            fct = max(hs, vs)
+        else 
+            error("Invalid scaling mode selected.")
+        end 
 
- scale!(qs, fct)
-end
+        scale!(qs, fct)
+    end
 
-nothing
+    nothing
 end
 
 function Base.show(io::IO, ::MIME"text/plain", s::QSize) 
-printstyled(io, "QSize", bold=true)
-print(" ($(s.width), $(s.height))")
+    printstyled(io, "QSize", bold=true)
+    print(" ($(s.width), $(s.height))")
 end
