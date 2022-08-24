@@ -6,4 +6,4 @@
 [![Build Status](https://github.com/MicheleCeresoli/PySide2.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/MicheleCeresoli/PySide2.jl/actions/workflows/CI.yml)
 [![Codecov](https://codecov.io/gh/micheleceresoli/PySide2.jl/branch/main/graph/badge.svg?token=A813UUIHGS)](https://codecov.io/gh/micheleceresoli/PySide2.jl)
 
-A Julia Interface to PySide2 Python Library for Qt 5
+This package provides a Julia Interface to the [PySide2](https://doc.qt.io/qtforpython-5/index.html) Python Library for [Qt5](https://www.qt.io/). It guarantees an easy access to all of PySide2 functionalities, allowing the development of complex GUI in Julia. It exploits [PythonCall](https://github.com/cjdoris/PythonCall.jl) to silently handle all type of conversions from Julia to Python and viceversa.
