@@ -11,20 +11,21 @@ using PythonCall: PythonCall
 
 const app = PythonCall.pynew()
 
-function __init__()
-    # # sta riga da modificare in futuro!
-    # PythonCall.event_loop_on(:pyside2; interval=0.01, fix=false); 
+# in futuro questo va spostato da qui 
+function start_qapp(interval=0.01)
+    instnc = QtWidgets.pyQtWidgets.QApplication.instance()
+    if PythonCall.pytruth(instnc)
+        PythonCall.pycopy!(app, instnc)
+    else
+        sys = PythonCall.pyimport("sys")
+        PythonCall.pycopy!(app, QtWidgets.pyQtWidgets.QApplication(sys.argv))
+    end
 
-    # # Check whether an instance of QApplication is already running.
-    # instnc = QtWidgets.pyQtWidgets.QApplication.instance()
-    # if PythonCall.pytruth(instnc)
-    #     PythonCall.pycopy!(app, instnc)
-    #     # println("Using existing QApplication.")
-    # else
-    #     sys = PythonCall.pyimport("sys")
-    #     PythonCall.pycopy!(app, QtWidgets.pyQtWidgets.QApplication(sys.argv))
-    #     # println("Created new QApplication.")
-    # end
+    PythonCall.event_loop_on(:pyside2; interval=interval, fix=false); 
+end
+
+
+function __init__()
 end
 
 end
