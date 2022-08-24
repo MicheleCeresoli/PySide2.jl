@@ -1,7 +1,7 @@
 name = "PySide2"
 uuid = "5040379f-85e7-4851-a3b3-846cbd53a636"
 authors = ["Michele Ceresoli"]
-version = "0.1.2"
+version = "0.1.3"
 
 [deps]
 CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"
