@@ -1,12 +1,14 @@
 module PySide2
 
-export QtCore, QtWidgets
+export QtCore, QtWidgets, QtWebEngineWidgets, QtGui
 
 include("core/QtCore.jl")
+include("gui/QtGui.jl")
 include("widgets/QtWidgets.jl")
 include("web/QWebEngine.jl")
 
-import .QtCore, .QtWidgets, .QtWebEngineWidgets
+import .QtCore, .QtWidgets, .QtWebEngineWidgets, .QtGui
+
 using PythonCall: PythonCall
 
 const app = PythonCall.pynew()
@@ -22,6 +24,7 @@ function start_qapp(interval=0.01)
     end
 
     PythonCall.event_loop_on(:pyside2; interval=interval, fix=false); 
+    nothing
 end
 
 
@@ -29,3 +32,4 @@ function __init__()
 end
 
 end
+

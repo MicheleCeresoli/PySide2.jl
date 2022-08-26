@@ -6,7 +6,6 @@ using PythonCall: PythonCall, pynew, pyimport, pycopy!,
 
 const pyQtCore = pynew() # initially NULL
 
-
 include("qt.jl")
 
 include("qpoint.jl")

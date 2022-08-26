@@ -428,17 +428,20 @@ end
 
 include("qwindow.jl")
 include("qlabel.jl")
+include("qdesk.jl")
+include("qapp.jl")
 
 const pyQtWidgets = PythonCall.pynew() 
 
 function __init__()
 
     PythonCall.pycopy!(pyQtWidgets, pyimport("PySide2.QtWidgets"))
-       
+    
     # Registers new custom rules for Python to Julia conversion
     PPN = PythonCall.PYCONVERT_PRIORITY_NORMAL
     pyconvert_add_rule("PySide2.QtWidgets:QMainWindow", QMainWindow, pyc_qmainwindow, PPN)
-
+    pyconvert_add_rule("PySide2.QtWidgets:QLabel", QLabel, pyc_qlabel, PPN)
+    pyconvert_add_rule("PySide2.QtWidgets:QDesktopWidget", QDesktopWidget, pyc_qdesk, PPN)
 end
 
 end
