@@ -18,6 +18,10 @@ end
 QLabel() = QLabel(pyQtWidgets.QLabel())
 QLabel(text::String) = QLabel(pyQtWidgets.QLabel(text))
 
+# Implements the conversion from the Python QRect object to the Julia type.
+@inline pyc_qlabel(S, l::Py) = PythonCall.pyconvert_return(QLabel(l))
+
+
 @inline function alignment(ql::QLabel)
     ql.obj.alignment()
     nothing 
