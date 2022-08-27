@@ -225,7 +225,7 @@ function normalise!(qr::QRect)
 end
 
 function united(q1::QRect, q2::QRect)
-    t  = min(top(q1), top(q2))
+    t = min(top(q1), top(q2))
     l = min(left(q1), left(q2))
 
     r  = max(right(q1), right(q2))
