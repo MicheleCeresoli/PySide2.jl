@@ -1,12 +1,10 @@
 
 module QtCore 
 
-using PythonCall: PythonCall, pynew, pyimport, pycopy!, 
-                  pyconvert_add_rule, pyconvert, Py
+using PythonCall: PythonCall, pyconvert_add_rule, pyconvert, Py
 
-const pyQtCore = pynew() # initially NULL
-
-include("qt.jl")
+import ..PyModules: pyQtCore
+import ..QtEnums
 
 include("qpoint.jl")
 include("qsize.jl")
@@ -18,8 +16,6 @@ include("qurl.jl")
 # include("qurl.jl")
 
 function __init__()
-
-    pycopy!(pyQtCore, pyimport("PySide2.QtCore"))
 
     # Registers new custom rules for Python to Julia conversion
     PPN = PythonCall.PYCONVERT_PRIORITY_NORMAL

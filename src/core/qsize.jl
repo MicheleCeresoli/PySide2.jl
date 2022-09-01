@@ -67,27 +67,23 @@ function scale!(qs::QSize, scale::Number)
     set_height!(qs, h)
 end
 
-function scale!(qs::QSize, w::Int, h::Int, mode::Symbol)
+function scale!(qs::QSize, w::Int, h::Int, mode::QtEnums.AspectRatioMode)
 
-if mode == :IgnoreAspectRatio 
-    set_width!(qs, w)
-    set_height!(qs, h)
-
+    if mode == QtEnums.IgnoreAspectRatio 
+        set_width!(qs, w)
+        set_height!(qs, h)
     else
         vs = h/height(qs)
         hs = w/width(qs)
 
-        if mode == :KeepAspectRatio 
+        if mode == QtEnums.KeepAspectRatio 
             fct = min(hs, vs)
-        elseif mode == :KeepAspectRatioByExpanding 
+        else
             fct = max(hs, vs)
-        else 
-            error("Invalid scaling mode selected.")
         end 
 
         scale!(qs, fct)
     end
-
     nothing
 end
 

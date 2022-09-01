@@ -20,9 +20,10 @@ export QWidget, children_rect, close, contents_margins, contents_rect,
        size, size_hint, size_increment, status_tip, tooltip, tooltip_duration, 
        under_mouse, update!, update_geometry!, updates_enabled, window_title, x, y
 
-using PythonCall
-import PythonCall: pyconvert_add_rule
 
+using PythonCall: PythonCall, pyconvert_add_rule, pyconvert, Py
+
+import ..PyModules: pyQtWidgets
 import ..QtCore: QRect, QLine, QMargins, 
                  QPoint, QSize, QUrl
 
@@ -431,12 +432,8 @@ include("qlabel.jl")
 include("qdesk.jl")
 include("qapp.jl")
 
-const pyQtWidgets = PythonCall.pynew() 
-
 function __init__()
 
-    PythonCall.pycopy!(pyQtWidgets, pyimport("PySide2.QtWidgets"))
-    
     # Registers new custom rules for Python to Julia conversion
     PPN = PythonCall.PYCONVERT_PRIORITY_NORMAL
     pyconvert_add_rule("PySide2.QtWidgets:QMainWindow", QMainWindow, pyc_qmainwindow, PPN)
