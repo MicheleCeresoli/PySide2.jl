@@ -10,8 +10,10 @@ PySide2.QtCore.QRect
 PySide2.QtWidgets.QWidget
 PySide2.QtWidgets.QMainWindow
 PySide2.QtWidgets.QLabel
+PySide2.QtWidgets.set_window_title!
 ```
 
 ```@docs 
 PySide2.QtWebEngineWidgets.QWebEngineView
 ```
+
